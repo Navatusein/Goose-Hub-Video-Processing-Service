@@ -4,6 +4,7 @@ using FFMpegCore.Pipes;
 using MassTransit;
 using Microsoft.Extensions.Configuration;
 using System.Diagnostics;
+using System.Drawing;
 using VideoProcessingService.MassTransit.Events;
 using VideoProcessingService.Models;
 using VideoProcessingService.Services;
@@ -21,6 +22,13 @@ namespace VideoProcessingService.MassTransit.JobConsumers
         private readonly MinioService _minioService;
 
         private readonly string _codec;
+
+        private readonly Dictionary<ContentQuality, Size> _qualities = new() 
+        {
+            { ContentQuality.FullHD, new Size(1920, 1080) },
+            { ContentQuality.HD, new Size(1280, 720) },
+            { ContentQuality.SD, new Size(854, 480) },
+        };
 
         /// <summary>
         /// Constructor
@@ -40,9 +48,9 @@ namespace VideoProcessingService.MassTransit.JobConsumers
         {
             var job = context.Message;
 
-            Logger.Information($"Start: {job.Quality}");
+            var quality = _qualities[job.Quality];
 
-            var quality = (VideoSize)(int)job.Quality;
+            Logger.Information($"Start: {quality}");
 
             var options = new Action<FFMpegArgumentOptions>(options =>
             {

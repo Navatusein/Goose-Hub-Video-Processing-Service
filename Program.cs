@@ -52,7 +52,7 @@ namespace VideoProcessingService
                 {
                     options.AddConsumer<VideoProcessingJobConsumer>(config =>
                     {
-                        config.ConcurrentMessageLimit = 1;
+                        config.UseConcurrencyLimit(1);
                     });
 
                     options.SetEndpointNameFormatter(new KebabCaseEndpointNameFormatter("video-processing-service", false));

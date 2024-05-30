@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "VideoProcessingService": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}

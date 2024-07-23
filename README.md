@@ -1,5 +1,7 @@
 # Video Processing Service
 
+[Головний репозиторій](https://github.com/Navatusein/Goose-Hub)
+
 ### Огляд
 
 Video Processing Service призначений для обробки файлів в HLS за допомогою FFmpeg
